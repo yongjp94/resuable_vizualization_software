@@ -1,5 +1,6 @@
 /**
  * Created by Christopher on 5/5/2016.
+ * Code reference https://bl.ocks.org/mbostock/4063570
  */
 
 var TreeChart = function() {
@@ -16,16 +17,14 @@ var TreeChart = function() {
 
         selection.each(function(root) {
 
-            console.log(root);
             var div = d3.select(this);
 
             var cluster = d3.layout.cluster()
-                .size(height, width - 160);
+                .size([height, width - 160]);
 
 
             var diagonal = d3.svg.diagonal()
                 .projection(function(d) {
-                    console.log([d.y, d.x]);
                     return [d.y, d.x]; });
             
             var svg = div.append("svg")
@@ -40,18 +39,19 @@ var TreeChart = function() {
             var link = svg.selectAll(".link")
                 .data(links)
                 .enter().append("path")
+                .attr("d", diagonal)
                 .attr("class", "link")
-                .style("fill", colorLink)
-                .style('stroke-width', brushSize)
-                .attr("d", diagonal);
-            
+                .attr("fill", colorLink)
+                .attr('stroke-width', brushSize);
 
+            
+            console.log(colorNode);
             var node = svg.selectAll(".node")
                 .data(nodes)
                 .enter().append("g")
-                .attr("class", "node")
+                //.attr("class", "node")
                 .style('fill', colorNode)
-                .style('stroke-width', brushSize)
+                .attr('stroke-width', brushSize)
                 .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
             node.append("circle")
@@ -61,7 +61,11 @@ var TreeChart = function() {
                 .attr("dx", function(d) { return d.children ? -8 : 8; })
                 .attr("dy", 3)
                 .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
-                .text(function(d) { return d.name; });
+                .text(function(d) { return d.name; })
+                .style('color:', 'black');
+
+            node.exit().remove();
+            links.exit().remove();
 
             d3.select(self.frameElement).style("height", height + "px");
 
