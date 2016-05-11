@@ -41,17 +41,17 @@ var TreeChart = function() {
                 .enter().append("path")
                 .attr("d", diagonal)
                 .attr("class", "link")
-                .attr("fill", colorLink)
-                .attr('stroke-width', brushSize);
+                .attr("stroke", colorLink)
+                .attr('stroke-width', brushSize + "px");
 
             
             console.log(colorNode);
             var node = svg.selectAll(".node")
                 .data(nodes)
                 .enter().append("g")
-                //.attr("class", "node")
+                .attr("class", "node")
                 .style('fill', colorNode)
-                .attr('stroke-width', brushSize)
+                .attr('stroke-width', brushSize + "px")
                 .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
             node.append("circle")
@@ -64,8 +64,6 @@ var TreeChart = function() {
                 .text(function(d) { return d.name; })
                 .style('color:', 'black');
 
-            node.exit().remove();
-            links.exit().remove();
 
             d3.select(self.frameElement).style("height", height + "px");
 

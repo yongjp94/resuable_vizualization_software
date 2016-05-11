@@ -3,8 +3,19 @@
  */
 
 $(function() {
-    //your code to create the chart goes here:
-    //if you need a file go to https://gist.github.com/mbostock/1093025
+
+
+   d3.json("data.json", function(error, root) {
+       if(error) throw error;
+
+       var chart = TreeChart().height(2200);
+
+       chart.nodeColor("blue");
+       chart.linkColor("red");
+       var div = d3.select("#my-Div").datum(root).call(chart);
+
+
+    });
 
 
 });
