@@ -44,8 +44,7 @@ var TreeChart = function() {
                 .attr("stroke", colorLink)
                 .attr('stroke-width', brushSize + "px");
 
-            
-            console.log(colorNode);
+
             var node = svg.selectAll(".node")
                 .data(nodes)
                 .enter().append("g")
@@ -64,6 +63,8 @@ var TreeChart = function() {
                 .text(function(d) { return d.name; })
                 .style('color:', 'black');
 
+            node.exit().remove();
+            link.exit().remove();
 
             d3.select(self.frameElement).style("height", height + "px");
 
