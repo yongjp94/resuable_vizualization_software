@@ -1,0 +1,12 @@
+{ "name" : "flare",
+  "children" : [
+    {"name" : "analytics"},
+    {"name" : "function"},
+    {"name" : "function2"},
+    {"name" : "function3",
+     "children" : [
+         {"name": "hello1"},
+         {"name": "hello2"}
+     ]
+    }]
+}

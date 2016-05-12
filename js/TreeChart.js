@@ -10,8 +10,8 @@ var TreeChart = function() {
     colorNode = "#fff";
     colorLink = "#ccc";
     brushSize = "1.5";
-    height = 2200;
-    width = 960;
+    height = 900;
+    width = 560;
 
     var chart = function(selection) {
 
